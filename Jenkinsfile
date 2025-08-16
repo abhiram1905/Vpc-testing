@@ -28,7 +28,7 @@ pipeline {
       steps {
         dir(params.TF_DIR) {
           withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-                            credentialsId: 'aws-creds', 
+                            credentialsId: '33c6efd0-8eb3-4530-8012-db1ef4147fc5', 
                             accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
                             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
             withEnv(["AWS_DEFAULT_REGION=${params.AWS_REGION}"]) {
