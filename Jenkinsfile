@@ -59,7 +59,8 @@ pipeline {
       }
       post {
         success {
-          archiveArtifacts artifacts: "${params.TF_DIR}/tfplan", onlyIfSuccessful: true
+          archiveArtifacts artifacts: "tfplan", onlyIfSuccessful: true
+
         }
       }
     }
