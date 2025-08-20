@@ -1,4 +1,13 @@
-  locals {
+backend "s3" {
+  bucket = "api-lambda-09112024"
+  key    = "Vpc-testing/terraform.tfstate"
+  region = "us-east-1"
+}
+
+
+
+
+locals {
   cluster_name = "abhi-eks-${random_string.suffix.result}"
 }
 
