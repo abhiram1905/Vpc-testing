@@ -1,6 +1,6 @@
 backend "s3" {
   bucket = "api-lambda-09112024"
-  key    = "Vpc-testing/terraform.tfstate"
+  key    = "terraform.tfstate"
   region = "us-east-1"
 }
 
