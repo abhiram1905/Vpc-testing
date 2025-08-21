@@ -1,5 +1,6 @@
 pipeline {
   agent any
+
   options {
     ansiColor('xterm')
     timestamps()
@@ -34,7 +35,7 @@ pipeline {
             withEnv(["AWS_DEFAULT_REGION=${params.AWS_REGION}"]) {
               sh '''
                 terraform --version
-                terraform init -input=false -upgrade
+                terraform init -input=false -upgrade -reconfigure
                 terraform validate
               '''
             }
@@ -60,7 +61,6 @@ pipeline {
       post {
         success {
           archiveArtifacts artifacts: "tfplan", onlyIfSuccessful: true
-
         }
       }
     }
@@ -97,7 +97,9 @@ pipeline {
                             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
             withEnv(["AWS_DEFAULT_REGION=${params.AWS_REGION}"]) {
               sh '''
-                terraform init -input=false
+                terraform init -input=false -reconfigure
+                terraform show || echo "State not found"
+                terraform state list || echo "Nothing to destroy"
                 terraform destroy -input=false -auto-approve
               '''
             }
